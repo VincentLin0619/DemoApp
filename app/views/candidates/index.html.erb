@@ -1,3 +1,23 @@
 <h1>Candidates#index</h1>
-<p>Find me in app/views/candidates/index.html.erb</p>
-<%= link_to 'Add Candidate', new_candidate_path %>
+<div class="flash-notice">
+  <%= flash[:notice] %>
+</div>
+<table class="cadidate-lists">
+  <tr class="list-title">
+    <th>Name</th>
+    <th>Party</th>
+    <th>Age</th>
+    <th>Politics</th>
+    <th>Action</th>
+  </tr>
+  <% @candidates.each do |candidate| %>
+    <tr>
+      <td><%= candidate.name %></td>
+      <td><%= candidate.party %></td>
+      <td><%= candidate.age %></td>
+      <td><%= candidate.politics %></td>
+      <td>edit/delete</td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Add Candidate' , new_candidate_path %>

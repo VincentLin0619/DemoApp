@@ -6,16 +6,12 @@
   <tr class="list-title">
     <th>Name</th>
     <th>Party</th>
-    <th>Age</th>
-    <th>Politics</th>
     <th>Action</th>
   </tr>
   <% @candidates.each do |candidate| %>
     <tr>
-      <td><%= candidate.name %></td>
+      <td><%= link_to candidate.name , candidate_path(candidate)  %></td>
       <td><%= candidate.party %></td>
-      <td><%= candidate.age %></td>
-      <td><%= candidate.politics %></td>
       <td>edit/delete</td>
     </tr>
   <% end %>

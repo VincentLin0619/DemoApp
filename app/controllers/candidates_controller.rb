@@ -2,9 +2,11 @@ class CandidatesController < ApplicationController
   def index
     @candidates = Candidate.all
   end
+
   def new
     @candidate = Candidate.new
   end
+
   def create
     @candidate = Candidate.new(candidate_params)
     if @candidate.save
@@ -15,6 +17,10 @@ class CandidatesController < ApplicationController
       flash.now[:alert] = error
       render :new
     end
+  end
+
+  def show
+    @candidate = Candidate.find(params[:id])
   end
 
   private

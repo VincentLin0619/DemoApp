@@ -1,3 +1,13 @@
-// Place all the styles related to the Candidates controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.field_with_errors{
+    display: inline-block;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    textarea{
+        border: 1px solid red;
+    }
+    label{
+        color: red;
+    }
+}

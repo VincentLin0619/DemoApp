@@ -1,7 +1,5 @@
 <h1>add Cadidate</h1>
-<div class="error-msg">
-  <%= flash.now[:alert] %>
-</div>
+<%= render "helpers/form/error_messages", object: @candidate %>
 <%= form_for @candidate do |f| %>
   <div class="form-field">
     <%= f.label :name %>

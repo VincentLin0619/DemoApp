@@ -12,7 +12,7 @@
     <tr>
       <td><%= link_to candidate.name , candidate_path(candidate)  %></td>
       <td><%= candidate.party %></td>
-      <td>edit/delete</td>
+      <td><%= link_to 'Edit', edit_candidate_path(candidate) %>/delete</td>
     </tr>
   <% end %>
 </table>

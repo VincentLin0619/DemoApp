@@ -1,0 +1,19 @@
+<%= form_for object do |f| %>
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-field">
+    <%= f.label :party %>
+    <%= f.text_field :party %>
+  </div>
+  <div class="form-field">
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+  </div>
+  <div class="form-field">
+    <%= f.label :politics %>
+    <%= f.text_area :politics %>
+  </div>
+  <%= f.submit %>
+<% end %>

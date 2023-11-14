@@ -1,10 +1,10 @@
 class CandidatesController < ApplicationController
-
-  before_action :find_params_id, only: [:show, :edit, :update]
+  before_action :find_params_id, only: %i[show edit update]
   # before_action :errors, only: [:create, :update]
 
   def index
     @candidates = Candidate.all
+    @path = controller_path
   end
 
   def new
@@ -13,19 +13,26 @@ class CandidatesController < ApplicationController
 
   def create
     @candidate = Candidate.new(candidate_params)
-    save_and_redirect(@candidate, candidates_path, "Candidate created successfully!!!", :new)
+    if @candidate.save
+      redirect_to candidates_path, notice: 'Candidate created successfully!!!'
+    else
+      render :new
+      flash[:alert] = errors(@candidate)
+    end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    save_and_redirect(@candidate, candidates_path, "Candidate updated successfully!!!", :edit)
+    if @candidate.update(candidate_params)
+      redirect_to candidates_path, notice: 'Candidate updated successfully!!!'
+    else
+      render :edit
+      flash[:alert] = errors(@candidate)
+    end
   end
-
 
   private
 
@@ -37,19 +44,7 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
   end
 
-  # 成功跳轉與錯誤訊息
-  def save_and_redirect(obj, path, msg, render)
-    if obj.save
-      redirect_to(path)
-      flash[:notice] = msg
-    else
-      render(render)
-      flash.now[:alert] = errors(obj)
-    end
-  end
-
   def errors(obj)
     obj.errors.full_messages if obj.errors.any?
   end
-
 end

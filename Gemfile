@@ -56,3 +56,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'rubocop', '~> 1.57', group: :development
+
+gem "gon", "~> 6.4"

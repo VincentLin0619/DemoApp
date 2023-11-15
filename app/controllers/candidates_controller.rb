@@ -1,8 +1,9 @@
 class CandidatesController < ApplicationController
-  before_action :find_params_id, only: %i[show edit update]
+  before_action :find_params_id, only: %i[show edit update destroy]
   # before_action :errors, only: [:create, :update]
 
   def index
+    gon.my_variable = request.path
     @candidates = Candidate.all
     @path = controller_path
   end
@@ -23,7 +24,9 @@ class CandidatesController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    gon.my_variable = request.path
+  end
 
   def update
     if @candidate.update(candidate_params)
@@ -32,6 +35,12 @@ class CandidatesController < ApplicationController
       render :edit
       flash[:alert] = errors(@candidate)
     end
+  end
+
+  def destroy
+    @candidate.destroy
+    redirect_to candidates_path
+    flash[:alert] = 'Candidate deleted successfully!!!'
   end
 
   private

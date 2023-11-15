@@ -1,4 +1,5 @@
 <h1>Edit Page</h1>
+<%= include_gon %>
 <%= render "candidates/helper/error_messages", object: @candidate %>
 <%= render "candidates/helper/form", object: @candidate, url: { action: "update" } %>
 <%= link_to "Back", candidates_path %>

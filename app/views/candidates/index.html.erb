@@ -1,6 +1,9 @@
 <h1>Candidates#index</h1>
+<%= include_gon %>
 <div class="flash-notice">
   <%= flash[:notice] %>
+  <%= flash[:error] %>
+  <%= flash[:alert] %>
 </div>
 <table class="cadidate-lists">
   <tr class="list-title">
@@ -12,7 +15,7 @@
     <tr>
       <td><%= link_to candidate.name , candidate_path(candidate)  %></td>
       <td><%= candidate.party %></td>
-      <td><%= link_to 'Edit', edit_candidate_path(candidate) %>/delete</td>
+      <td><%= link_to 'Edit', edit_candidate_path(candidate) %>/<%= link_to 'Delete', candidate_path(candidate.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

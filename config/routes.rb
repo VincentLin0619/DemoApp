@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :candidates
+  resources :candidates do
+    member do
+      post :vote, to: 'candidates#vote'
+    end
+  end
   root to: 'candidates#index'
 end

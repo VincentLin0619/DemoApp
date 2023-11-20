@@ -1,10 +1,10 @@
 class CandidatesController < ApplicationController
-  before_action :find_params_id, only: %i[show edit update destroy]
+  before_action :find_params_id, only: %i[show edit update destroy vote]
   # before_action :errors, only: [:create, :update]
 
   def index
     gon.my_variable = request.path
-    @candidates = Candidate.all
+    @candidates = Candidate.all.order(id: :asc)
     @path = controller_path
   end
 
@@ -43,10 +43,15 @@ class CandidatesController < ApplicationController
     flash[:alert] = 'Candidate deleted successfully!!!'
   end
 
+  def vote
+    @candidate.vote_logs.create('ip_address': request.remote_ip)
+    redirect_to candidates_path
+  end
+
   private
 
   def candidate_params
-    params.require(:candidate).permit(:name, :party, :age, :politics)
+    params.require(:candidate).permit(:name, :party, :age, :politics, :votes)
   end
 
   def find_params_id

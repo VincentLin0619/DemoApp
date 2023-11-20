@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_08_083421) do
+ActiveRecord::Schema.define(version: 2023_11_20_064337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,18 @@ ActiveRecord::Schema.define(version: 2023_11_08_083421) do
     t.string "party"
     t.integer "age"
     t.text "politics"
-    t.integer "votes"
+    t.integer "votes", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vote_logs", force: :cascade do |t|
+    t.bigint "candidate_id", null: false
+    t.string "ip_address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_vote_logs_on_candidate_id"
+  end
+
+  add_foreign_key "vote_logs", "candidates"
 end
